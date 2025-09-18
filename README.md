@@ -10,7 +10,6 @@
 - **Surface Smoothing:** Configurable smoothing parameters for noise reduction.
 
 #### User Interface
-- **Bloomberg Terminal Aesthetic:** Dark theme with orange accents.
 - **Resizable Panels:** Drag-to-resize left and right panels.
 - **Real-time Updates:** Live market data with connection status indicators.
 - **Export Capabilities:** PNG export for surfaces and data export functionality.
@@ -132,18 +131,6 @@
 3.  Black-Scholes model calculates implied volatilities.
 4.  Surface interpolation creates a smooth 3D grid.
 5.  Frontend renders interactive visualizations.
-
----
-
-### 🎨 Styling and Theme
-
-The application uses a Bloomberg Terminal-inspired design:
-
--   **Primary Color:** Bloomberg Orange (`#ff7a1a`)
--   **Background:** Dark terminal theme (`#0a0a0a`)
--   **Typography:** JetBrains Mono monospace font
--   **Accent Colors:** Green for positive values, red for negative
--   **UI Elements:** Rounded corners, subtle shadows, and smooth transitions
 
 ---
 

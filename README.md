@@ -1,9 +1,5 @@
 # Implied Volatility Surface Construction Terminal
 
-A professional Bloomberg-style web application for constructing and analyzing implied volatility surfaces with real-time data visualization and interactive 3D/2D plotting capabilities.
-
----
-
 ### 🚀 Features
 
 #### Core Functionality

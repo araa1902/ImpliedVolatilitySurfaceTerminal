@@ -83,20 +83,23 @@
 
 1.  **Symbol Selection**
     Use the search bar in the header to select different symbols (SPY, QQQ, AAPL, etc.). The application will automatically fetch options data for the selected symbol.
+    
 
-2.  **Building Surfaces**
+    > This platform uses a public API which has displayed unstable behaviours at time. It is not guarenteed that the data retreived will be the real time collection. In the case of an error, the system will produce accurate synthetic data relative to historical behaviour of that selected ticker.
+
+3.  **Building Surfaces**
     -   **Load Market Data:** Click "Refresh Data" to fetch the latest options chain.
     -   **Configure Parameters:** Adjust interpolation method, smoothing, and other settings in the control panel.
     -   **Build Surface:** Click "Build Surface" to construct the volatility surface.
     -   **Analyze Results:** View the 3D surface and examine 2D slices for detailed analysis.
 
-3.  **Visualization Options**
+4.  **Visualization Options**
     -   **3D Surface:** Interactive 3D plot with rotation, zoom, and pan capabilities.
     -   **2D Slices:** Toggle between volatility smile and term structure views.
     -   **Color Schemes:** Choose from Viridis, Plasma, Hot, Cool, Jet, Rainbow, or Turbo.
     -   **Camera Angles:** Switch between perspective, front, side, and top views.
 
-4.  **Export and Analysis**
+5.  **Export and Analysis**
     -   **Image Export:** Save high-resolution PNG images of surfaces.
     -   **Data Export:** Export underlying data for external analysis.
     -   **Metrics Display:** View real-time statistics including average volatility, skew, and ranges.

@@ -74,7 +74,7 @@
 2.  **Start the Backend (Python)**
 
     ```bash
-    python main.py
+    python server.py
     ```
 
 ---

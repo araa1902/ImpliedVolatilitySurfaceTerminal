@@ -1,0 +1,14 @@
+# IDE files
+.vscode/
+
+# Operating System files
+.DS_Store
+
+# Python files
+__pycache__/
+*.pyc
+
+# Node.js
+node_modules/
+pnpm-lock.yaml
+npm-debug.log*

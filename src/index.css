@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+/* Bloomberg terminal color palette */
+:root {
+  --bloomberg-orange: #ff6600;
+  --bloomberg-amber: #ffaa00;
+  --bloomberg-blue: #0066cc;
+  --bloomberg-green: #00cc66;
+  --bloomberg-red: #cc0000;
+  --bloomberg-yellow: #ffcc00;
+  --bg-terminal: #000000;
+  --bg-panel: #001122;
+  --bg-header: #003366;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --text-accent: #ffaa00;
+  --border-primary: #ff6600;
+  --border-secondary: #333333;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'JetBrains Mono', 'Courier New', monospace !important;
+  background: var(--bg-terminal);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+/* Remove all border radius globally */
+* {
+  border-radius: 0 !important;
+}
+
+/* Text selection with Bloomberg orange */
+::selection {
+  background: var(--bloomberg-orange);
+  color: #000;
+}
+
+/* Bloomberg style inputs - sharp, monospace */
+.ant-input,
+.ant-select-selector,
+.ant-input-number,
+.ant-auto-complete .ant-input {
+  background: var(--bg-terminal) !important;
+  border: 1px solid var(--bloomberg-orange) !important;
+  color: var(--text-accent) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-weight: 500 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.ant-input:hover,
+.ant-select-selector:hover {
+  border-color: var(--bloomberg-amber) !important;
+  box-shadow: 0 0 0 1px var(--bloomberg-amber) !important;
+}
+
+.ant-input:focus,
+.ant-select-selector:focus,
+.ant-input-focused .ant-select-selector {
+  border-color: var(--bloomberg-amber) !important;
+  box-shadow: 0 0 0 2px rgba(255, 170, 0, 0.3) !important;
+}
+
+/* Placeholder styling */
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255, 170, 0, 0.5) !important;
+}
+
+/* Dropdown styling */
+.ant-select-dropdown {
+  background: var(--bg-terminal) !important;
+  border: 1px solid var(--bloomberg-orange) !important;
+  border-radius: 0 !important;
+}
+
+.ant-select-item {
+  color: var(--text-primary) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+.ant-select-item-option-selected {
+  background: var(--bloomberg-orange) !important;
+  color: #000 !important;
+}
+
+.ant-select-item:hover {
+  background: rgba(255, 102, 0, 0.2) !important;
+}
+
+/* Buttons - Bloomberg style */
+.ant-btn {
+  border-radius: 0 !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  font-size: 10px !important;
+  height: 24px !important;
+  padding: 0 8px !important;
+}
+
+.ant-btn-primary {
+  background: var(--bloomberg-orange) !important;
+  border-color: var(--bloomberg-orange) !important;
+  color: #000 !important;
+}
+
+.ant-btn-primary:hover {
+  background: var(--bloomberg-amber) !important;
+  border-color: var(--bloomberg-amber) !important;
+}
+
+/* Scrollbars - sharp Bloomberg style */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-terminal);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bloomberg-orange);
+  border: none;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bloomberg-amber);
+}
+
+/* Tables - Bloomberg grid style */
+.ant-table {
+  background: transparent !important;
+  border: 1px solid var(--border-secondary) !important;
+}
+
+.ant-table-thead > tr > th {
+  background: var(--bg-header) !important;
+  border-bottom: 2px solid var(--bloomberg-orange) !important;
+  border-right: 1px solid var(--border-secondary) !important;
+  color: var(--text-accent) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-weight: 700 !important;
+  font-size: 10px !important;
+  text-transform: uppercase !important;
+  padding: 4px 6px !important;
+}
+
+.ant-table-tbody > tr > td {
+  background: transparent !important;
+  border-bottom: 1px solid var(--border-secondary) !important;
+  border-right: 1px solid rgba(51, 51, 51, 0.3) !important;
+  color: var(--text-primary) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 10px !important;
+  padding: 3px 6px !important;
+}
+
+.ant-table-tbody > tr:hover > td {
+  background: rgba(255, 102, 0, 0.1) !important;
+}
+
+/* Cards - flat Bloomberg panels */
+.ant-card {
+  border-radius: 0 !important;
+  border: 1px solid var(--border-secondary) !important;
+}
+
+.ant-card-head {
+  border-radius: 0 !important;
+  border-bottom: 2px solid var(--bloomberg-orange) !important;
+}
+
+/* Typography */
+.ant-typography {
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+/* Sliders */
+.ant-slider-rail {
+  background: var(--border-secondary) !important;
+}
+
+.ant-slider-track {
+  background: var(--bloomberg-orange) !important;
+}
+
+.ant-slider-handle {
+  border: 2px solid var(--bloomberg-orange) !important;
+  background: var(--bloomberg-orange) !important;
+  border-radius: 0 !important;
+  width: 12px !important;
+  height: 12px !important;
+}
+
+/* Switches */
+.ant-switch {
+  border-radius: 0 !important;
+  background: var(--border-secondary) !important;
+}
+
+.ant-switch-checked {
+  background: var(--bloomberg-orange) !important;
+}
+
+/* Tooltips */
+.ant-tooltip-inner {
+  background: var(--bg-terminal) !important;
+  border: 1px solid var(--bloomberg-orange) !important;
+  color: var(--text-accent) !important;
+  border-radius: 0 !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 10px !important;
+}
+
+.ant-tooltip-arrow-content {
+  background: var(--bloomberg-orange) !important;
+}

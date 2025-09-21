@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import StockInfo from './StockInfo';
 
 const PanelContainer = styled.div`
   padding: 16px;
@@ -131,11 +132,43 @@ const ValidationError = styled.div`
   font-weight: 500;
 `;
 
-function DataPanel({ marketData, onCalculateSurface, isCalculating, error }) {
+function DataPanel({ marketData, onCalculateSurface, isCalculating, error, selectedSymbol }) {
   const [selectedModel, setSelectedModel] = useState('blackscholes');
   const [riskFreeRate, setRiskFreeRate] = useState(0.05);
   const [spotPrice, setSpotPrice] = useState(400);
   const [validationErrors, setValidationErrors] = useState({});
+  const [stockInfo, setStockInfo] = useState(null);
+  const [stockInfoLoading, setStockInfoLoading] = useState(false);
+  const [stockInfoError, setStockInfoError] = useState(null);
+
+  // Fetch stock info when selectedSymbol changes
+  useEffect(() => {
+    if (!selectedSymbol) return;
+    
+    setStockInfoLoading(true);
+    setStockInfoError(null);
+    
+    fetch(`http://localhost:8000/api/stock_info?ticker=${selectedSymbol}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.stock_info) {
+          setStockInfo(data.stock_info);
+          // Update spot price from fetched data
+          if (data.stock_info.price_data?.current_price) {
+            setSpotPrice(data.stock_info.price_data.current_price);
+          }
+        } else {
+          setStockInfoError('No stock data available');
+        }
+      })
+      .catch(err => {
+        console.error('Error fetching stock info:', err);
+        setStockInfoError(err.message);
+      })
+      .finally(() => {
+        setStockInfoLoading(false);
+      });
+  }, [selectedSymbol]);
 
   // Validate parameters
   useEffect(() => {
@@ -268,6 +301,14 @@ function DataPanel({ marketData, onCalculateSurface, isCalculating, error }) {
           </ControlButton>
         </CardBody>
       </SectionCard>
+
+      {/* {selectedSymbol && (
+        // <StockInfo
+        //   stockInfo={stockInfo}
+        //   loading={stockInfoLoading}
+        //   error={stockInfoError}
+        // />
+      )} */} {/* Stock Info Panel Needs fixing */}
     </PanelContainer>
   );
 }

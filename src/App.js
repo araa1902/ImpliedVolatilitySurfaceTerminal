@@ -275,7 +275,11 @@ function App() {
         // Enhanced volatility surface with realistic term structure
         const z = strikes.map(strike => 
           times.map(time => {
-            const moneyness = Math.log(400 / strike);
+            const basePrice = { 
+              'SPY': 400, 'QQQ': 350, 'IWM': 180, 'AAPL': 175, 
+              'MSFT': 350, 'GOOGL': 140, 'TSLA': 200, 'NVDA': 450 
+            }[selectedSymbol] || 400;
+            const moneyness = Math.log(basePrice / strike);
             const termStructure = 0.15 + 0.05 * Math.sqrt(time);
             const skew = 0.03 * moneyness / Math.sqrt(time + 0.1);
             const smile = 0.02 * moneyness * moneyness / (time + 0.1);
@@ -442,6 +446,7 @@ function App() {
             isCalculating={isCalculating}
             error={error}
             onRefresh={fetchMarketData}
+            selectedSymbol={selectedSymbol}
           />
         </LeftPanel>
 

@@ -1,149 +1,257 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
-/* Bloomberg terminal color palette */
+/* Professional Bloomberg terminal color palette */
 :root {
-  --bloomberg-orange: #ff6600;
-  --bloomberg-amber: #ffaa00;
+  --bloomberg-orange: #ff7a1a;
+  --bloomberg-amber: #ffaa33;
   --bloomberg-blue: #0066cc;
   --bloomberg-green: #00cc66;
-  --bloomberg-red: #cc0000;
+  --bloomberg-red: #ff4d4f;
   --bloomberg-yellow: #ffcc00;
   --bg-terminal: #000000;
-  --bg-panel: #001122;
-  --bg-header: #003366;
+  --bg-panel: #0f0f10;
+  --bg-card: #151515;
+  --bg-header: #1a1a1a;
   --text-primary: #ffffff;
-  --text-secondary: #cccccc;
-  --text-accent: #ffaa00;
-  --border-primary: #ff6600;
-  --border-secondary: #333333;
+  --text-secondary: #b3b3b3;
+  --text-muted: #666666;
+  --text-accent: #ff7a1a;
+  --border-primary: #ff7a1a;
+  --border-secondary: #262626;
+  --border-subtle: #1a1a1a;
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
+/* Professional monospace font stack */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Fira Code', 'Consolas', 'Courier New', monospace !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  font-size: 62.5%; /* 10px base for rem calculations */
 }
 
 body {
   margin: 0;
-  font-family: 'JetBrains Mono', 'Courier New', monospace !important;
   background: var(--bg-terminal);
   color: var(--text-primary);
   overflow-x: hidden;
-  font-size: 11px;
-  line-height: 1.4;
+  font-size: 1.1rem; /* 11px */
+  line-height: 1.45;
+  font-weight: 400;
+  letter-spacing: 0.025em;
 }
 
-/* Remove all border radius globally */
+/* Typography scale */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+h1 { font-size: 1.8rem; }
+h2 { font-size: 1.6rem; }
+h3 { font-size: 1.4rem; }
+h4 { font-size: 1.2rem; }
+h5 { font-size: 1.1rem; }
+h6 { font-size: 1.0rem; }
+
+p, span, div, label {
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+/* Remove all border radius globally for sharp Bloomberg look */
 * {
   border-radius: 0 !important;
 }
 
-/* Text selection with Bloomberg orange */
+/* Professional text selection */
 ::selection {
   background: var(--bloomberg-orange);
   color: #000;
+  text-shadow: none;
 }
 
-/* Bloomberg style inputs - sharp, monospace */
+::-moz-selection {
+  background: var(--bloomberg-orange);
+  color: #000;
+  text-shadow: none;
+}
+
+/* Bloomberg style inputs - professional grade */
+input, textarea, select, button {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 1.1rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.025em !important;
+}
+
 .ant-input,
 .ant-select-selector,
 .ant-input-number,
-.ant-auto-complete .ant-input {
+.ant-auto-complete .ant-input,
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
   background: var(--bg-terminal) !important;
-  border: 1px solid var(--bloomberg-orange) !important;
-  color: var(--text-accent) !important;
+  border: 1px solid var(--border-secondary) !important;
+  color: var(--text-primary) !important;
   font-family: 'JetBrains Mono', monospace !important;
   font-weight: 500 !important;
+  font-size: 1.1rem !important;
   border-radius: 0 !important;
   box-shadow: none !important;
+  transition: all 0.15s ease !important;
+  padding: 0.6rem 0.8rem !important;
+  line-height: 1.4 !important;
 }
 
 .ant-input:hover,
-.ant-select-selector:hover {
-  border-color: var(--bloomberg-amber) !important;
-  box-shadow: 0 0 0 1px var(--bloomberg-amber) !important;
+.ant-select-selector:hover,
+input:hover,
+textarea:hover,
+select:hover {
+  border-color: var(--bloomberg-orange) !important;
+  box-shadow: 0 0 0 1px rgba(255, 122, 26, 0.3) !important;
 }
 
 .ant-input:focus,
 .ant-select-selector:focus,
-.ant-input-focused .ant-select-selector {
-  border-color: var(--bloomberg-amber) !important;
-  box-shadow: 0 0 0 2px rgba(255, 170, 0, 0.3) !important;
+.ant-input-focused .ant-select-selector,
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--bloomberg-orange) !important;
+  box-shadow: 0 0 0 2px rgba(255, 122, 26, 0.2) !important;
+  outline: none !important;
 }
 
 /* Placeholder styling */
 input::placeholder,
-textarea::placeholder {
-  color: rgba(255, 170, 0, 0.5) !important;
+textarea::placeholder,
+.ant-input::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 0.8 !important;
+  font-style: italic !important;
 }
 
-/* Dropdown styling */
+/* Professional dropdown styling */
 .ant-select-dropdown {
-  background: var(--bg-terminal) !important;
-  border: 1px solid var(--bloomberg-orange) !important;
+  background: var(--bg-panel) !important;
+  border: 1px solid var(--border-primary) !important;
   border-radius: 0 !important;
+  box-shadow: var(--shadow-medium) !important;
 }
 
 .ant-select-item {
   color: var(--text-primary) !important;
   font-family: 'JetBrains Mono', monospace !important;
+  font-size: 1.1rem !important;
+  font-weight: 500 !important;
+  padding: 0.6rem 0.8rem !important;
+  transition: all 0.1s ease !important;
 }
 
 .ant-select-item-option-selected {
   background: var(--bloomberg-orange) !important;
   color: #000 !important;
+  font-weight: 600 !important;
 }
 
 .ant-select-item:hover {
-  background: rgba(255, 102, 0, 0.2) !important;
+  background: rgba(255, 122, 26, 0.15) !important;
+  color: var(--text-primary) !important;
 }
 
-/* Buttons - Bloomberg style */
-.ant-btn {
+/* Professional button styling */
+.ant-btn,
+button {
   border-radius: 0 !important;
   font-family: 'JetBrains Mono', monospace !important;
   font-weight: 600 !important;
   text-transform: uppercase !important;
-  font-size: 10px !important;
-  height: 24px !important;
-  padding: 0 8px !important;
+  font-size: 1.0rem !important;
+  min-height: 3.0rem !important;
+  padding: 0 1.2rem !important;
+  letter-spacing: 0.1em !important;
+  transition: all 0.15s ease !important;
+  cursor: pointer !important;
+  border: 1px solid var(--border-secondary) !important;
+  background: transparent !important;
+  color: var(--text-primary) !important;
 }
 
-.ant-btn-primary {
+.ant-btn-primary,
+button[data-primary="true"] {
   background: var(--bloomberg-orange) !important;
   border-color: var(--bloomberg-orange) !important;
   color: #000 !important;
+  font-weight: 700 !important;
 }
 
-.ant-btn-primary:hover {
+.ant-btn-primary:hover,
+button[data-primary="true"]:hover {
   background: var(--bloomberg-amber) !important;
   border-color: var(--bloomberg-amber) !important;
+  color: #000 !important;
+  transform: translateY(-1px) !important;
 }
 
-/* Scrollbars - sharp Bloomberg style */
+.ant-btn:hover,
+button:hover {
+  border-color: var(--bloomberg-orange) !important;
+  color: var(--bloomberg-orange) !important;
+  transform: translateY(-1px) !important;
+}
+
+.ant-btn:disabled,
+button:disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+/* Professional scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 0.8rem;
+  height: 0.8rem;
 }
 
 ::-webkit-scrollbar-track {
   background: var(--bg-terminal);
+  border: 1px solid var(--border-subtle);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--bloomberg-orange);
-  border: none;
+  background: var(--border-secondary);
+  border: 1px solid var(--border-subtle);
+  transition: background 0.2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--bloomberg-amber);
+  background: var(--bloomberg-orange);
 }
 
-/* Tables - Bloomberg grid style */
+::-webkit-scrollbar-corner {
+  background: var(--bg-terminal);
+}
+
+/* Professional table styling */
 .ant-table {
   background: transparent !important;
   border: 1px solid var(--border-secondary) !important;
+  font-family: 'JetBrains Mono', monospace !important;
 }
 
 .ant-table-thead > tr > th {
@@ -153,78 +261,264 @@ textarea::placeholder {
   color: var(--text-accent) !important;
   font-family: 'JetBrains Mono', monospace !important;
   font-weight: 700 !important;
-  font-size: 10px !important;
+  font-size: 1.0rem !important;
   text-transform: uppercase !important;
-  padding: 4px 6px !important;
+  padding: 0.8rem 1.0rem !important;
+  letter-spacing: 0.05em !important;
 }
 
 .ant-table-tbody > tr > td {
   background: transparent !important;
-  border-bottom: 1px solid var(--border-secondary) !important;
-  border-right: 1px solid rgba(51, 51, 51, 0.3) !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+  border-right: 1px solid var(--border-subtle) !important;
   color: var(--text-primary) !important;
   font-family: 'JetBrains Mono', monospace !important;
-  font-size: 10px !important;
-  padding: 3px 6px !important;
+  font-size: 1.1rem !important;
+  font-weight: 500 !important;
+  padding: 0.8rem 1.0rem !important;
+  transition: background 0.1s ease !important;
 }
 
 .ant-table-tbody > tr:hover > td {
-  background: rgba(255, 102, 0, 0.1) !important;
+  background: rgba(255, 122, 26, 0.08) !important;
 }
 
-/* Cards - flat Bloomberg panels */
+.ant-table-tbody > tr:nth-child(even) > td {
+  background: rgba(255, 255, 255, 0.01) !important;
+}
+
+.ant-table-tbody > tr:nth-child(even):hover > td {
+  background: rgba(255, 122, 26, 0.08) !important;
+}
+
+/* Professional card styling */
 .ant-card {
   border-radius: 0 !important;
   border: 1px solid var(--border-secondary) !important;
+  background: var(--bg-panel) !important;
+  box-shadow: var(--shadow-subtle) !important;
 }
 
 .ant-card-head {
   border-radius: 0 !important;
   border-bottom: 2px solid var(--bloomberg-orange) !important;
+  background: var(--bg-card) !important;
+  padding: 1.2rem 1.6rem !important;
 }
 
-/* Typography */
-.ant-typography {
+.ant-card-head-title {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-weight: 700 !important;
+  font-size: 1.2rem !important;
+  color: var(--text-accent) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+}
+
+.ant-card-body {
+  padding: 1.6rem !important;
+}
+
+/* Professional sliders */
+.ant-slider {
   font-family: 'JetBrains Mono', monospace !important;
 }
 
-/* Sliders */
 .ant-slider-rail {
   background: var(--border-secondary) !important;
+  height: 0.4rem !important;
 }
 
 .ant-slider-track {
   background: var(--bloomberg-orange) !important;
+  height: 0.4rem !important;
 }
 
 .ant-slider-handle {
   border: 2px solid var(--bloomberg-orange) !important;
   background: var(--bloomberg-orange) !important;
   border-radius: 0 !important;
-  width: 12px !important;
-  height: 12px !important;
+  width: 1.6rem !important;
+  height: 1.6rem !important;
+  margin-top: -0.6rem !important;
+  transition: all 0.15s ease !important;
 }
 
-/* Switches */
+.ant-slider-handle:hover,
+.ant-slider-handle:focus {
+  border-color: var(--bloomberg-amber) !important;
+  background: var(--bloomberg-amber) !important;
+  box-shadow: 0 0 0 0.4rem rgba(255, 122, 26, 0.2) !important;
+}
+
+/* Professional switches */
 .ant-switch {
   border-radius: 0 !important;
   background: var(--border-secondary) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  min-width: 4.4rem !important;
+  height: 2.2rem !important;
 }
 
 .ant-switch-checked {
   background: var(--bloomberg-orange) !important;
 }
 
-/* Tooltips */
+.ant-switch-handle {
+  border-radius: 0 !important;
+  width: 1.8rem !important;
+  height: 1.8rem !important;
+  top: 0.2rem !important;
+}
+
+/* Professional tooltips */
 .ant-tooltip-inner {
-  background: var(--bg-terminal) !important;
+  background: var(--bg-panel) !important;
   border: 1px solid var(--bloomberg-orange) !important;
-  color: var(--text-accent) !important;
+  color: var(--text-primary) !important;
   border-radius: 0 !important;
   font-family: 'JetBrains Mono', monospace !important;
-  font-size: 10px !important;
+  font-size: 1.0rem !important;
+  font-weight: 500 !important;
+  padding: 0.8rem 1.0rem !important;
+  box-shadow: var(--shadow-medium) !important;
 }
 
 .ant-tooltip-arrow-content {
   background: var(--bloomberg-orange) !important;
+}
+
+/* Professional form styling */
+.ant-form-item-label > label {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-weight: 600 !important;
+  font-size: 1.0rem !important;
+  color: var(--text-secondary) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+.ant-form-item-explain-error {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 1.0rem !important;
+  color: var(--bloomberg-red) !important;
+}
+
+/* Professional modal styling */
+.ant-modal-content {
+  border-radius: 0 !important;
+  background: var(--bg-panel) !important;
+  border: 1px solid var(--border-primary) !important;
+  box-shadow: var(--shadow-medium) !important;
+}
+
+.ant-modal-header {
+  border-radius: 0 !important;
+  border-bottom: 2px solid var(--bloomberg-orange) !important;
+  background: var(--bg-card) !important;
+  padding: 1.6rem 2.0rem !important;
+}
+
+.ant-modal-title {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-weight: 700 !important;
+  font-size: 1.4rem !important;
+  color: var(--text-accent) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+}
+
+.ant-modal-body {
+  padding: 2.0rem !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+/* Professional loading and spin */
+.ant-spin-dot {
+  color: var(--bloomberg-orange) !important;
+}
+
+.ant-spin-text {
+  font-family: 'JetBrains Mono', monospace !important;
+  color: var(--text-secondary) !important;
+}
+
+/* Professional notification styling */
+.ant-notification {
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+.ant-notification-notice {
+  border-radius: 0 !important;
+  border: 1px solid var(--border-secondary) !important;
+  background: var(--bg-panel) !important;
+}
+
+/* Canvas and visualization styling */
+canvas {
+  font-family: 'JetBrains Mono', monospace !important;
+  border: 1px solid var(--border-secondary) !important;
+}
+
+/* Ensure all children inherit the font */
+* {
+  font-family: inherit !important;
+}
+
+/* Code and pre styling */
+code, pre {
+  font-family: 'JetBrains Mono', monospace !important;
+  background: var(--bg-card) !important;
+  color: var(--text-accent) !important;
+  padding: 0.2rem 0.4rem !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+
+pre {
+  padding: 1.0rem !important;
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+}
+
+/* Professional focus indicators */
+*:focus {
+  outline: 2px solid var(--bloomberg-orange) !important;
+  outline-offset: 2px !important;
+}
+
+*:focus:not(:focus-visible) {
+  outline: none !important;
+}
+
+/* Professional disabled state */
+*:disabled,
+*[disabled] {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  color: var(--text-muted) !important;
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  html {
+    font-size: 58%; /* Slightly smaller on mobile */
+  }
+  
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1.4rem; }
+  h3 { font-size: 1.2rem; }
+}
+
+@media (min-width: 1440px) {
+  html {
+    font-size: 65%; /* Slightly larger on large screens */
+  }
+}
+
+/* High DPI display optimization */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }

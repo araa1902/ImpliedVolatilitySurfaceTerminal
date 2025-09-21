@@ -43,17 +43,18 @@ class ImpliedVolatilitySurface:
             return
 
         print(f"Calculating implied volatilities for {len(self.option_data)} options...")
-        self.option_data["implied_vol"] = self.option_data.apply(
-            lambda row: implied_volatility(
+        def calculate_implied_volatility(row):
+            result = implied_volatility(
                 market_price=row["mid_price"],
                 S=self.current_price,
                 K=row["strike"],
                 T=row["time_to_maturity"],
                 r=self.risk_free_rate,
                 option_type=row["option_type"],
-            ),
-            axis=1,
-        )
+            )
+            return result[0] if isinstance(result, tuple) else result
+
+        self.option_data["implied_vol"] = self.option_data.apply(calculate_implied_volatility, axis=1)
 
         self.option_data.dropna(subset=["implied_vol"], inplace=True)
         self.option_data = self.option_data[self.option_data["implied_vol"] > 0.001]
@@ -202,7 +203,7 @@ class ImpliedVolatilitySurface:
         grid = None
 
         if method_lower in ("linear", "cubic", "nearest") and griddata is not None:
-            grid = griddata(points_raw, values_raw, (Sg, Tg), method="cubic" if method_lower == "cubic" else method_lower, fill_value=np.nanmean(values_raw))
+            grid = griddata(points_raw, values_raw, (Sg, Tg), method="cubic" if method_lower == "cubic" else method_lower, fill_value=float(np.nanmean(values_raw)))
         elif method_lower == "kriging":
             if OrdinaryKriging is not None:
                 try:
@@ -211,12 +212,12 @@ class ImpliedVolatilitySurface:
                 except Exception:
                     # fallback
                     if griddata is not None:
-                        grid = griddata(points_raw, values_raw, (Sg, Tg), method="linear", fill_value=np.nanmean(values_raw))
+                        grid = griddata(points_raw, values_raw, (Sg, Tg), method="linear", fill_value=float(np.nanmean(values_raw)))
                     else:
                         grid = base_values
             else:
                 if griddata is not None:
-                    grid = griddata(points_raw, values_raw, (Sg, Tg), method="linear", fill_value=np.nanmean(values_raw))
+                    grid = griddata(points_raw, values_raw, (Sg, Tg), method="linear", fill_value=float(np.nanmean(values_raw)))
                 else:
                     grid = base_values
         else:
@@ -342,9 +343,28 @@ if _FLASK_AVAILABLE:
             _instances[ticker].generate_surface_data()
         return _instances[ticker]
 
+    @app.route("/api/stock_info", methods=["GET"])
+    def api_stock_info():
+        """Get comprehensive stock information"""
+        ticker = request.args.get("ticker")
+        if not ticker:
+            return jsonify({"error": "ticker parameter is required"}), 400
+        
+        # Create a DataFetcher instance
+        fetcher = DataFetcher(ticker, use_live=True)
+        stock_info = fetcher.fetch_stock_info()
+        
+        return jsonify({
+            "ticker": ticker,
+            "stock_info": stock_info
+        })
+
     @app.route("/api/market_data", methods=["GET"])
     def api_market_data():
-        ticker = request.args.get("ticker", "SPY")
+        ticker = request.args.get("ticker")
+        if not ticker:
+            return jsonify({"error": "ticker parameter is required"}), 400
+            
         ivs = _get_instance(ticker)
         if ivs.option_data.empty:
             return jsonify({"ticker": ticker, "options": []})
@@ -363,7 +383,10 @@ if _FLASK_AVAILABLE:
     @app.route("/api/surface", methods=["POST"])
     def api_surface():
         data = request.get_json(force=True)
-        ticker = data.get("ticker", "SPY")
+        ticker = data.get("ticker")
+        if not ticker:
+            return jsonify({"error": "ticker parameter is required"}), 400
+            
         config = data.get("config", {})
         method = config.get("interpolation", "cubic")
         smoothing = int(config.get("smoothing", 50))
@@ -382,7 +405,10 @@ if _FLASK_AVAILABLE:
     def api_export_snapshot():
         """Enhanced export with multiple formats"""
         data = request.get_json(force=True)
-        ticker = data.get("ticker", "SPY")
+        ticker = data.get("ticker")
+        if not ticker:
+            return jsonify({"error": "ticker parameter is required"}), 400
+            
         format_type = data.get("format", "json")
         include_analysis = data.get("include_analysis", True)
         
@@ -408,7 +434,10 @@ if _FLASK_AVAILABLE:
     def api_slice_analysis():
         """Generate 2D slice data"""
         data = request.get_json(force=True)
-        ticker = data.get("ticker", "SPY")
+        ticker = data.get("ticker")
+        if not ticker:
+            return jsonify({"error": "ticker parameter is required"}), 400
+            
         slice_type = data.get("slice_type", "smile")  # 'smile' or 'term'
         slice_value = data.get("slice_value", 30)
         
@@ -447,5 +476,3 @@ if _FLASK_AVAILABLE:
             }
         
         return jsonify({"slice": slice_data})
-
-# ...existing code...

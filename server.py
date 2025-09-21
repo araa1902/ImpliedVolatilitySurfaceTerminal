@@ -20,6 +20,7 @@ if __name__ == "__main__":
     print(f"API endpoints available:")
     print(f"  - GET  /api/health")
     print(f"  - GET  /api/market_data?ticker=SPY")
+    print(f"  - GET  /api/stock_info?ticker=SPY")
     print(f"  - POST /api/surface")
     print(f"  - POST /api/slice_analysis")
     print(f"  - POST /api/export_snapshot")

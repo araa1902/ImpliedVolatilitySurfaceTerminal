@@ -104,9 +104,8 @@
     -   **Camera Angles:** Switch between perspective, front, side, and top views.
 
 5.  **Export and Analysis**
-    -   **Image Export:** Save high-resolution PNG images of surfaces.
     -   **Data Export:** Export underlying data for external analysis.
-    -   **Metrics Display:** View real-time statistics including average volatility, skew, and ranges.
+    -   **Metrics Display:** View statistics including average volatility, skew, and ranges.
 
 ---
 

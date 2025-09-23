@@ -27,62 +27,6 @@
 
 ---
 
-### 📋 Prerequisites
-
-- **Node.js** (v14 or higher)
-- **Python** (v3.8 or higher)
-- **pnpm** (recommended) or `npm`
-
----
-
-### 🛠️ Installation
-
-1.  **Clone the Repository**
-
-    ```bash
-    git clone <repository-url>
-    cd implied-volatility-surface
-    ```
-
-2.  **Install Frontend Dependencies**
-
-    ```bash
-    # Using pnpm (recommended)
-    pnpm install
-
-    # Or using npm
-    npm install
-    ```
-
-3.  **Install Python Dependencies**
-
-    ```bash
-    pip install numpy pandas scipy plotly yfinance flask flask-cors
-    ```
-
----
-
-### 🏃‍♂️ Running the Application
-
-1.  **Start the Frontend (React)**
-
-    ```bash
-    # Using pnpm
-    pnpm start
-
-    # Or using npm
-    npm start
-    ```
-    The frontend will be available at `http://localhost:3000`
-
-2.  **Start the Backend (Python)**
-
-    ```bash
-    python server.py
-    ```
-
----
-
 ### 🎮 Usage Guide
 
 1.  **Symbol Selection**
@@ -139,19 +83,6 @@
 5.  Frontend renders interactive visualizations.
 
 ---
-
-### 🔧 Development
-
-#### Available Scripts
-| Script | Description |
-| :--- | :--- |
-| `pnpm start` / `npm start` | Starts the frontend development server |
-| `pnpm build` / `npm run build` | Builds the application for production |
-| `pnpm test` / `npm test` | Runs tests |
-
----
-
-### Key Dependencies
 
 -   **React** `18.3.1`: Modern React with hooks and concurrent features
 -   **Plotly.js** `2.35.3`: Advanced plotting and visualization
